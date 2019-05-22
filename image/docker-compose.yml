@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  gitlib-alpine:
+    image: vikashkothary/gitlab-ce:11.10.4-alpine3.9
+    build:
+      context: .
+      dockerfile: Dockerfile

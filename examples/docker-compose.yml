@@ -1,0 +1,36 @@
+version: "3"
+services:
+  gitlab:
+    image: vikashkothary/gitlab-ce:11.10.4-alpine3.9
+    container_name: gitlab
+    hostname: ${GITLAB_HOST}
+    ports:
+      - '80:80'
+      - '443:443'
+      - '22:22'
+    volumes:
+      - ./srv/gitlab/config:/etc/gitlab:rw
+      - ./srv/gitlab/logs:/var/log/gitlab:rw
+      - ./srv/gitlab/data:/var/opt/gitlab:rw
+    restart: always
+    stdin_open: true
+    tty: true
+
+  # postgresql:
+  #   image: vikashkothary/postgresql:9.6.2-alpine
+  #   container_name: gitlab_postgresql
+  #   environment:
+  #     - POSTGRES_USER=${POSTGRES_USER}
+  #     - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+  #     - POSTGRES_DB=${POSTGRES_DB}
+  #   volumes:
+  #     - ./srv/gitlab/postgresql:/var/lib/postgresql:rw
+
+  # redis:
+  #   image: vikashkothary/redis:3.0.7-alpine
+  #   container_name: gitlab_redis
+  #   volumes:
+  #     - ./srv/gitlab/redis:/var/lib/redis:rw
+  #   restart: always
+  #   stdin_open: true
+  #   tty: true
